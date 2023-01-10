@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+</head>
+<html lang="es" charset="UTF-8">
+    <!-- 
+    Nombre: Michell Alejandro García Vargas
+    Expediente: 259663
+    Grupo: 30
+    Semestre: 7mo 
+    -->
+    <label style="padding: 1%; font-size: 400%; margin: 3% 0 0 0;">Datos Iniciales</label><br><br>
+    
+    <form action="./Conexion_259663.php" method="GET">
+        <label for="tabla">Tabla</label><br>
+        <select class="inputdata" name="tabla" id="tabla" placeholder="Tabla para la Consulta">
+            <option value="Salarios_Minimos">Salarios Mínimos</option>
+            <option value="Esperanza_Vida">Esperanza de Vida</option>
+            <option value="Mortalidad">Mortalidad</option>
+            <option value="Suicidios">Suicidios</option>
+            <option value="Piramide_Poblacion">Piramide de Población</option>
+            <option value="Temperatura_Maxima">Temperatura Máxima</option>
+            <option value="Carne_Cerdo">Carne de Cerdo</option>
+            <option value="Valor_Bitcoin">Valor del Bitcoin</option>
+            <option value="Acciones_Apple">Acciones de Apple</option>
+            <option value="Acciones_Google">Acciones de Google</option>
+        </select><br><br>
+        <label for="k">K</label><br>
+        <input class="inputdata" type="text" name="k" id="k" placeholder="Valor de K"><br><br>
+        <label for="j">J</label><br>
+        <input class="inputdata" type="text" name="j" id="j" placeholder="Valor de J"><br><br>
+        <label for="m">M</label><br>
+        <input class="inputdata" type="text" name="m" id="m" placeholder="Valor de M"><br><br>
+        <label for="a">A (Alfa)</label><br>
+        <input class="inputdata" type="text" name="a" id="a" placeholder="Valor de ALFA"><br><br>
+        <label for="pronostico">Pronóstico</label><br>
+        <select class="inputdata" name="pronostico" id="pronostico" placeholder="Pronostico Seleccionado">
+            <option value="PS">Promedio Simple</option>
+            <option value="PMS">Promedio Móvil Simple</option>
+            <option value="PMD">Promedio Móvil Doble</option>
+            <option value="PMDA">Promedio Móvil Doble Ajustado</option>
+            <option value="PTMAC">Pronóstico de Tasa Media de Crecimiento</option>
+        </select><br><br>
+        <input class="inputdata" type="submit" style="margin: 5% 0 5% 0; font-size: 200%;">
+    </form><br><br><br>
+</html>
+<style>
+    body {
+        background-color: #372869;
+        font-family: Verdana, Geneva, sans-serif;
+    }
+    label {
+        font-size: x-large;
+        font-weight: 600;
+        display: grid;
+        justify-content: center;
+        color: aliceblue;
+        margin: 0 0 -1% 0;
+    }
+    form {
+        display: grid;
+        justify-content: center;
+        align-self: center;
+    }
+    .inputdata{
+        font-size: large;
+        font-weight: 600;
+        padding: 3% 0.8%;
+        margin: 0 0 2% 0;
+        border-radius: 10px;
+        text-align: center;
+        outline: none;
+        border: none;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover{
+        color: white;
+        background-color: #222f3e;
+        border: white 1px solid;
+    }
+</style>
+

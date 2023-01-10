@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Filtro de los Archivos</title>
+    </head>
+
+    <!-- 
+        MATERIA: Inteligencia de Negocios 
+        INTEGRANTES: 
+            - García Vargas Michell Alejandro - 259663
+            - Jiménez Elizalde Andrés - 259678
+            - León Paulin Daniel - 260541
+    -->
+
+    <body>
+        <form action="./AplicarFiltro.php" method="POST">
+
+            <label for="">Selecciona los filtros que serán aplicados</label><br><br>
+            
+            <input type="checkbox" name="CVE_ENT" id="CVE_ENT">
+            <label for="CVE_ENT"> CVE_ENT </label><br>
+
+            <input type="checkbox" name="AMBITO" id="AMBITO">
+            <label for="AMBITO"> AMBITO </label><br>
+
+            <input type="checkbox" name="MAPA" id="MAPA">
+            <label for="MAPA"> MAPA </label><br>
+
+            <input type="checkbox" name="CVE_MUN" id="CVE_MUN">
+            <label for="CVE_MUN"> CVE_MUN </label><br>
+
+            <input type="checkbox" name="CVE_LOC" id="CVE_LOC">
+            <label for="CVE_LOC"> CVE_LOC </label><br>
+
+            <input type="checkbox" name="ALTITUD" id="ALTITUD">
+            <label for="ALTITUD"> ALTITUD </label><br>
+
+            <input type="checkbox" name="LAT_DECIMAL" id="LAT_DECIMAL">
+            <label for="LAT_DECIMAL"> LAT_DECIMAL </label><br>
+
+            <input type="checkbox" name="LONG_DECIMAL" id="LONG_DECIMAL">
+            <label for="LONG_DECIMAL"> LONG_DECIMAL </label><br>
+
+            <input type="checkbox" name="NOM_ENT" id="NOM_ENT">
+            <label for="NOM_ENT"> NOM_ENT </label><br>
+
+            <input type="checkbox" name="NOM_ABR" id="NOM_ABR">
+            <label for="NOM_ABR"> NOM_ABR </label><br><br>
+
+            <input type="submit" value="Enviar">
+        </form>
+    </body>
+</html>
