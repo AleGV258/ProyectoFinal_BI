@@ -1,11 +1,11 @@
 <?php
 
-    /* 
-    Nombre: Michell Alejandro García Vargas
-    Expediente: 259663
-    Grupo: 30
-    Semestre: 7mo
-    */
+    // PROYECTO FINAL
+    // MATERIA: Inteligencia de Negocios 
+    // INTEGRANTES: 
+    //     - García Vargas Michell Alejandro - 259663
+    //     - Jiménez Elizalde Andrés - 259678
+    //     - León Paulin Daniel - 260541
 
     $Con = mysqli_connect('127.0.0.1', 'root', '', 'cucage');
     $ManejadorKML = fopen("./2011+/AGEEML_202211161338592.kml", "r");

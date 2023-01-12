@@ -1,11 +1,11 @@
 <?php
 
-    /* 
-    Nombre: Michell Alejandro García Vargas
-    Expediente: 259663
-    Grupo: 30
-    Semestre: 7mo
-    */
+    // PROYECTO FINAL
+    // MATERIA: Inteligencia de Negocios 
+    // INTEGRANTES: 
+    //     - García Vargas Michell Alejandro - 259663
+    //     - Jiménez Elizalde Andrés - 259678
+    //     - León Paulin Daniel - 260541
 
     // (A) LOAD PHPSPREADSHEET LIBRARY
     require "vendor/autoload.php";
