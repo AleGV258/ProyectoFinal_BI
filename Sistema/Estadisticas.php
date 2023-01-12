@@ -3,7 +3,7 @@
 // if (isset($_SESSION['Usuario'])) {
 
 // EJEMPLO LINK: http://localhost/ProyectoFInal/Proyecto_InteligenciaNegocios/Sistema/estadisticas.php?NombreArchivo=ArchivoX&Errores=10&Insertados=90&Total=100&TipoArchivo=SDS
-                                  // || aqui depende del path                   ||        
+// || aqui depende del path                   ||        
 
 $NombreArchivo = $_GET['NombreArchivo']; //Nombre del archivo
 $TipoArchivo = $_GET['TipoArchivo']; //Tipo de archivo
@@ -11,7 +11,7 @@ $Errores = $_GET['Errores']; //Cantidad de errores encontrados
 $Insertados = $_GET['Insertados']; //Cantidad de inserts correctos
 $Total = $_GET['Total']; //Cantidad total de filas que estaban en el archivo
 
-
+$filtroParams = "?NombreArchivo=$NombreArchivo&TipoArchivo=$TipoArchivo&Errores=$Errores&Insertados=$Insertados&Total=$Total";
 
 $PorcentajeInsertados = intval($Insertados / $Total * 100); //PorcentajeInsertados de datos insertados
 $PorcentajeErrores = intval($Errores / $Total * 100); //PorcentajeInsertados de datos no insertados
@@ -37,7 +37,9 @@ $PorcentajeErrores = intval($Errores / $Total * 100); //PorcentajeInsertados de 
             Tipo de archivo: <strong><?php echo $TipoArchivo; ?></strong>
         </div>
         <div id="dato">
-            <button id="filtro"> Aplicar Filtro</button>
+            <a href="../ETL/FFiltro.html <?php echo $filtroParams; ?>">
+                <input id="filtro" type="button" value="Aplicar Filtro" />
+            </a>
         </div>
 
 
