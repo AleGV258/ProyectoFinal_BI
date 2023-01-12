@@ -2,7 +2,9 @@
 // session_start();
 // if (isset($_SESSION['Usuario'])) {
 
-// EJEMPLO LINK: http://localhost/ETL/estadisticas.php?NombreArchivo=ArchivoX&Errores=10&Insertados=90&Total=100&TipoArchivo=SDS
+// EJEMPLO LINK: http://localhost/ProyectoFInal/Proyecto_InteligenciaNegocios/Sistema/estadisticas.php?NombreArchivo=ArchivoX&Errores=10&Insertados=90&Total=100&TipoArchivo=SDS
+                                  // || aqui depende del path                   ||        
+
 $NombreArchivo = $_GET['NombreArchivo']; //Nombre del archivo
 $TipoArchivo = $_GET['TipoArchivo']; //Tipo de archivo
 $Errores = $_GET['Errores']; //Cantidad de errores encontrados
