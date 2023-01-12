@@ -34,6 +34,9 @@ $PorcentajeErrores = intval($Errores / $Total * 100); //PorcentajeInsertados de 
         <div id="dato">
             Tipo de archivo: <strong><?php echo $TipoArchivo; ?></strong>
         </div>
+        <div id="dato">
+            <button id="filtro"> Aplicar Filtro</button>
+        </div>
 
 
     </div>
@@ -68,6 +71,11 @@ $PorcentajeErrores = intval($Errores / $Total * 100); //PorcentajeInsertados de 
         </div>
     </div>
     <style>
+        #filtro {
+            border: 10px solid blue;
+            border-radius: 7px;
+        }
+
         #info {
             width: 900px;
             float: left;
