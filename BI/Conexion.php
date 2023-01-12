@@ -1,12 +1,16 @@
 <?php
-    /* 
-    Nombre: Michell Alejandro García Vargas
-    Expediente: 259663
-    Grupo: 30
-    Semestre: 7mo
-    */
 
-    //Recuperar la sesion de las variables
+    // PROYECTO FINAL
+    // MATERIA: Inteligencia de Negocios 
+    // INTEGRANTES: 
+    //     - García Vargas Michell Alejandro - 259663
+    //     - Jiménez Elizalde Andrés - 259678
+    //     - León Paulin Daniel - 260541
+    
+    // Conectarse al SMBD
+    $Conexion = mysqli_connect('127.0.0.1', 'root', '', 'data');
+
+    // Recuperar la sesion de las variables
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
@@ -26,10 +30,7 @@
         $PRONOSTICO = $_SESSION['pronostico'];
     }
 
-    //Conectarse al SMBD
-    $Conexion = mysqli_connect('127.0.0.1', 'root', '', 'data');
-
-    //Ejectar Consultas
+    // Ejectar Consultas
     $SQL = 'SELECT Periodo, Frecuencia FROM '.$TABLA.';';
     $Result = mysqli_query($Conexion, $SQL);
     $N = mysqli_num_rows($Result);
@@ -37,36 +38,34 @@
         if($J > 0 && $J < ($N-$K-1)){
             if($M > 0){
                 if($ALFA >= 0 && $ALFA <= 1){
-                    //Calcular la Tabla con Pronósticos
+    // Calcular la Tabla con Pronósticos
                     
-    //Interpretar Resultados
+    // Interpretar Resultados
     for($f = 0; $f < mysqli_num_rows($Result); $f++){
         $Fila = mysqli_fetch_row($Result);
-        $Datos[$f][0] = $Fila[0]; //Periodo
-        $Datos[$f][1] = $Fila[1]; //Frecuencia
+        $Datos[$f][0] = $Fila[0]; // Periodo
+        $Datos[$f][1] = $Fila[1]; // Frecuencia
     }
-    $Total = count($Datos); //50
+    $Total = count($Datos); // 100
 
-    //Hacer Nulos los Valores Pronosticados
+    // Hacer Nulos los Valores Pronosticados
     for($c = 0; $c < 100; $c++){
         $Datos[$Total][$c] = NULL;
     }
-    if($TABLA == 'Salarios_Minimos' || $TABLA == 'Temperatura_Maxima' || $TABLA == 'Carne_Cerdo' ||$TABLA == 'Valor_Bitcoin' || $TABLA == 'Acciones_Apple' || $TABLA == 'Acciones_Google'){
+    if($TABLA == 'Temperatura_Maxima' || $TABLA == 'Acciones_Google'){
         $Datos[$Total][0] = date('Y-m-d', strtotime($Datos[$Total-1][0]. ' + 1 months'));
-    }elseif($TABLA == 'Esperanza_Vida' || $TABLA == 'Mortalidad' || $TABLA == 'Suicidios' || $TABLA == 'SPiramide_Poblacion'){
-        $Datos[$Total][0] = date('Y-m-d', strtotime($Datos[$Total-1][0]. ' + 1 years'));
     }
 
-    //Calcular Promedio Simple (PS)
+    // Calcular Promedio Simple (PS)
     $Datos[0][2] = NULL;
     $AcumuladorPS = 0;
     for($f = 1; $f <= $Total; $f++){
         $AcumuladorPS = $AcumuladorPS + $Datos[$f-1][1];
         $PS = ($AcumuladorPS / $f);
-        $Datos[$f][2] = round($PS, 2); //Promedio Simple
+        $Datos[$f][2] = round($PS, 2); // Promedio Simple
     }
 
-    //Calcular Promedio Móvil Simple (PMS)
+    // Calcular Promedio Móvil Simple (PMS)
     for($f = 0; $f < $K; $f++){
         $Datos[$f][5] = NULL;
     }
@@ -76,10 +75,10 @@
             $AcumuladorPMS = $AcumuladorPMS + $Datos[$f-$i][1];
         }
         $PMS = ($AcumuladorPMS / $K);
-        $Datos[$f][5] = round($PMS, 2); //Promedio Móvil Simple
+        $Datos[$f][5] = round($PMS, 2); // Promedio Móvil Simple
     }
 
-    //Calcular Promedio Móvil Doble (PMD)
+    // Calcular Promedio Móvil Doble (PMD)
     for($f = 0; $f < ($K + $J); $f++){
         $Datos[$f][8] = NULL;
     }
@@ -89,10 +88,10 @@
             $AcumuladorPMD = $AcumuladorPMD + $Datos[$f-$i][5];
         }
         $PMD = ($AcumuladorPMD / $J);
-        $Datos[$f][8] = round($PMD, 2); //Promedio Móvil Doble
+        $Datos[$f][8] = round($PMD, 2); // Promedio Móvil Doble
     }
 
-    //Calcular Promedio Móvil Doble Ajustado (PMDA)
+    // Calcular Promedio Móvil Doble Ajustado (PMDA)
     for($f = 0; $f < ($K + $J); $f++){
         $Datos[$f][11] = NULL;
     }
@@ -100,10 +99,10 @@
         $A = ($Datos[$f][5] * 2) - $Datos[$f][8];
         $B = ((abs($Datos[$f][5] - $Datos[$f][8]) * 2) / ($Total - 1));
         $PMDA = $A + ($B * $M);
-        $Datos[$f][11] = round($PMDA, 2); //Promedio Móvil Doble Ajustado
+        $Datos[$f][11] = round($PMDA, 2); // Promedio Móvil Doble Ajustado
     }
 
-    //Calcular Prónostico de Tasa Media de Crecimiento
+    // Calcular Prónostico de Tasa Media de Crecimiento
     $Datos[0][14] = NULL;
     $Datos[0][15] = NULL;
     $Datos[1][15] = NULL;
@@ -113,10 +112,10 @@
     }
     for($f = 2; $f <= $Total; $f++){
         $PTMAC = ((($Datos[$f-1][14] / 100) * $Datos[$f-1][1]) + $Datos[$f-1][1]);
-        $Datos[$f][15] = round($PTMAC, 2); //Pronóstico de Tasa Media de Crecimiento
+        $Datos[$f][15] = round($PTMAC, 2); // Pronóstico de Tasa Media de Crecimiento
     }
 
-    //Calcular Suavizado Exponencial
+    // Calcular Suavizado Exponencial
     $r = 0;
     $c = 0;
     switch($PRONOSTICO){
@@ -146,15 +145,15 @@
     }
     for($f = $r; $f <= $Total; $f++){
         $SE = ((($Datos[$f-1][1] - $Datos[$f-1][$c]) * $ALFA) + $Datos[$f-1][$c]);
-        $Datos[$f][18] = round($SE, 2); //Suavizado Exponencial
+        $Datos[$f][18] = round($SE, 2); // Suavizado Exponencial
     }
 
-    //----------------------------------- ERRORES -----------------------------------
+    // ----------------------------------- ERRORES -----------------------------------
     $Error_Medio = [];
     $Error_Relativo = [];
     $Error_Cuadratico_Medio = [];
 
-    //Calcular Error Absoluto (PS)
+    // Calcular Error Absoluto (PS)
     $ErrorABS = 0;
     $Datos[0][3] = NULL;
     for($f = 1; $f < $Total; $f++){
@@ -162,7 +161,7 @@
         $Datos[$f][3] =  round($ErrorABS, 2);
     }
 
-    //Calcular Error Medio (PS)
+    // Calcular Error Medio (PS)
     $Suma = 0;
     $ErrorMedio = 0;
     for($f = 1; $f < $Total; $f++){
@@ -171,12 +170,12 @@
     }
     $Error_Medio[0] = round($ErrorMedio, 2);
 
-    //Calcular Error Relativo (PS)
+    // Calcular Error Relativo (PS)
     $ValorPronosticado = $PS;
     $ErrorRelativo = (($ErrorMedio * 100) / $ValorPronosticado);
     $Error_Relativo[0] = round($ErrorRelativo, 2);
 
-    //Calcular Error Cuadrático Medio (PS)
+    // Calcular Error Cuadrático Medio (PS)
     $Exponente = 0;
     $SumaExp = 0;
     $ErrorCuadraticoMedio = 0;
@@ -189,7 +188,7 @@
     $ErrorCuadraticoMedio = sqrt($SumaExp / ($Total - 1));
     $Error_Cuadratico_Medio[0] = round($ErrorCuadraticoMedio, 2);
 
-    //Calcular Error Absoluto (PMS)
+    // Calcular Error Absoluto (PMS)
     $ErrorABS = 0;
     for($f = 0; $f < $K; $f++){
         $Datos[$f][6] = NULL;
@@ -200,7 +199,7 @@
         $Datos[$f][6] = round($ErrorABS, 2);
     }
 
-    //Calcular Error Medio (PMS)
+    // Calcular Error Medio (PMS)
     $Suma = 0;
     $ErrorMedio = 0;
     for($f = $K; $f < $Total; $f++){
@@ -209,12 +208,12 @@
     $ErrorMedio = ($Suma / ($Total - $K));
     $Error_Medio[1] = round($ErrorMedio, 2);
 
-    //Calcular Error Relativo (PMS)
+    // Calcular Error Relativo (PMS)
     $ValorPronosticado = $PMS;
     $ErrorRelativo = (($ErrorMedio * 100) / $ValorPronosticado);
     $Error_Relativo[1] = round($ErrorRelativo, 2);
 
-    //Calcular Error Cuadrático Medio (PMS)
+    // Calcular Error Cuadrático Medio (PMS)
     $Exponente = 0;
     $SumaExp = 0;
     $ErrorCuadraticoMedio = 0;
@@ -226,7 +225,7 @@
     $ErrorCuadraticoMedio = sqrt($SumaExp / ($Total - $K));
     $Error_Cuadratico_Medio[1] = round($ErrorCuadraticoMedio, 2);
 
-    //Calcular Error Absoluto (PMD)
+    // Calcular Error Absoluto (PMD)
     $ErrorABS = 0;
     for($f = 0; $f < ($K + $J); $f++){
         $Datos[$f][9] = NULL;
@@ -237,7 +236,7 @@
         $Datos[$f][9] = round($ErrorABS, 2);
     }
 
-    //Calcular Error Medio (PMD)
+    // Calcular Error Medio (PMD)
     $Suma = 0;
     $ErrorMedio = 0;
     for($f = ($K + $J); $f < $Total; $f++){
@@ -246,7 +245,7 @@
     $ErrorMedio = ($Suma / ($Total - ($K + $J)));
     $Error_Medio[2] = round($ErrorMedio, 2);
 
-    //Calcular Error Relativo (PMD)
+    // Calcular Error Relativo (PMD)
     $ValorPronosticado = $PMD;
     for($f = $Total; $f <= ($Total + 1); $f++){
         $AcumuladorPMD = 0;
@@ -258,7 +257,7 @@
     $ErrorRelativo = (($ErrorMedio * 100) / $ValorPronosticado2);
     $Error_Relativo[2] = round($ErrorRelativo, 2);
     
-    //Calcular Error Cuadrático Medio (PMD)
+    // Calcular Error Cuadrático Medio (PMD)
     $Exponente = 0;
     $SumaExp = 0;
     $ErrorCuadraticoMedio = 0;
@@ -270,7 +269,7 @@
     $ErrorCuadraticoMedio = sqrt($SumaExp / ($Total - ($K + $J)));
     $Error_Cuadratico_Medio[2] = round($ErrorCuadraticoMedio, 2);
 
-    //Calcular Error Absoluto (PMDA)
+    // Calcular Error Absoluto (PMDA)
     $ErrorABS = 0;
     for($f = 0; $f < ($K + $J); $f++){
         $Datos[$f][12] = NULL;
@@ -281,7 +280,7 @@
         $Datos[$f][12] = round($ErrorABS, 2);
     }
    
-    //Calcular Error Medio (PMDA)
+    // Calcular Error Medio (PMDA)
     $Suma = 0;
     $ErrorMedio = 0;
     for($f = ($K + $J); $f < $Total; $f++){
@@ -290,12 +289,12 @@
     $ErrorMedio = ($Suma / ($Total - ($K + $J)));
     $Error_Medio[3] = round($ErrorMedio, 2);
    
-    //Calcular Error Relativo (PMDA)
+    // Calcular Error Relativo (PMDA)
     $ValorPronosticado = $PMDA;
     $ErrorRelativo = (($ErrorMedio * 100) / $ValorPronosticado);
     $Error_Relativo[3] = round($ErrorRelativo, 2);
        
-    //Calcular Error Cuadrático Medio (PMDA)
+    // Calcular Error Cuadrático Medio (PMDA)
     $Exponente = 0;
     $SumaExp = 0;
     $ErrorCuadraticoMedio = 0;
@@ -307,7 +306,7 @@
     $ErrorCuadraticoMedio = sqrt($SumaExp / ($Total - ($K + $J)));
     $Error_Cuadratico_Medio[3] = round($ErrorCuadraticoMedio, 2);
 
-    //Calcular Error Absoluto (PTMAC)
+    // Calcular Error Absoluto (PTMAC)
     $ErrorABS = 0;
     for($f = 0; $f < 2; $f++){
         $Datos[$f][16] = NULL;
@@ -318,7 +317,7 @@
         $Datos[$f][16] = round($ErrorABS, 2);
     }
    
-    //Calcular Error Medio (PTMAC)
+    // Calcular Error Medio (PTMAC)
     $Suma = 0;
     $ErrorMedio = 0;
     for($f = 2; $f < $Total; $f++){
@@ -327,12 +326,12 @@
     $ErrorMedio = ($Suma / ($Total - 2));
     $Error_Medio[4] = round($ErrorMedio, 2);
    
-    //Calcular Error Relativo (PTMAC)
+    // Calcular Error Relativo (PTMAC)
     $ValorPronosticado = $PTMAC;
     $ErrorRelativo = (($ErrorMedio * 100) / $ValorPronosticado);
     $Error_Relativo[4] = round($ErrorRelativo, 2);
        
-    //Calcular Error Cuadrático Medio (PTMAC)
+    // Calcular Error Cuadrático Medio (PTMAC)
     $Exponente = 0;
     $SumaExp = 0;
     $ErrorCuadraticoMedio = 0;
@@ -344,7 +343,7 @@
     $ErrorCuadraticoMedio = sqrt($SumaExp / ($Total - 2));
     $Error_Cuadratico_Medio[4] = round($ErrorCuadraticoMedio, 2);
 
-    //Calcular Error Absoluto (SE)
+    // Calcular Error Absoluto (SE)
     $ErrorABS = 0;
     for($f = 0; $f < $r; $f++){
         $Datos[$f][19] = NULL;
@@ -355,7 +354,7 @@
         $Datos[$f][19] = round($ErrorABS, 2);
     }
    
-    //Calcular Error Medio (SE)
+    // Calcular Error Medio (SE)
     $Suma = 0;
     $ErrorMedio = 0;
     for($f = $r; $f < $Total; $f++){
@@ -364,12 +363,12 @@
     $ErrorMedio = ($Suma / ($Total - $r));
     $Error_Medio[5] = round($ErrorMedio, 2);
    
-    //Calcular Error Relativo (SE)
+    // Calcular Error Relativo (SE)
     $ValorPronosticado = $SE;
     $ErrorRelativo = (($ErrorMedio * 100) / $ValorPronosticado);
     $Error_Relativo[5] = round($ErrorRelativo, 2);
        
-    //Calcular Error Cuadrático Medio (SE)
+    // Calcular Error Cuadrático Medio (SE)
     $Exponente = 0;
     $SumaExp = 0;
     $ErrorCuadraticoMedio = 0;
@@ -381,22 +380,13 @@
     $ErrorCuadraticoMedio = sqrt($SumaExp / ($Total - $r));
     $Error_Cuadratico_Medio[5] = round($ErrorCuadraticoMedio, 2);
 
-    //Creación de Tabla
-    
-    echo("<br><h2>García Vargas Michell Alejandro - 259663</h2>");
-    echo("<table><tr>");
+    // Creación de Tabla
+    echo("<div class='row'><a class='column1' href='./Configuracion.html'>Regresar</a>");
     switch($TABLA){
-        case 'Salarios_Minimos': echo("<h2>Salarios Mínimos</h2><br>"); break;
-        case 'Esperanza_Vida': echo("<h2>Esperanza de Vida</h2><br>"); break;
-        case 'Mortalidad': echo("<h2>Mortalidad</h2><br>"); break;
-        case 'Suicidios': echo("<h2>Suicidios</h2><br>"); break;
-        case 'Piramide_Poblacion': echo("<h2>Piramide de Población</h2><br>"); break;
-        case 'Temperatura_Maxima': echo("<h2>Temperatura Máxima</h2><br>"); break;
-        case 'Carne_Cerdo': echo("<h2>Carne de Cerdo</h2><br>"); break;
-        case 'Valor_Bitcoin': echo("<h2>Valor del Bitcoin</h2><br>"); break;
-        case 'Acciones_Apple': echo("<h2>Acciones de Apple</h2><br>"); break;
-        case 'Acciones_Google': echo("<h2>Acciones de Google</h2><br>"); break;
+        case 'Temperatura_Maxima': echo("<h2 class='column2''>Temperatura Máxima de Querétaro</h2><br>"); break;
+        case 'Acciones_Google': echo("<h2 class='column2''>Acciones de Google</h2><br>"); break;
     }
+    echo("</div><table><tr>");
     echo("  </tr>
             <tr>
                 <th>NO.</th>
@@ -423,56 +413,56 @@
                 <th>CUADRADO (SE)</th>
             </tr>");
 
-    //Mostrar Matriz
+    // Mostrar Matriz
     for($f = 0; $f < mysqli_num_rows($Result) + 1; $f++){
         echo("<tr><td>");
-        echo($f+1); //NÚMERO
+        echo($f+1); // NÚMERO
         echo("</td><td>");
-        echo($Datos[$f][0]); //PERIODO
+        echo($Datos[$f][0]); // PERIODO
         echo("</td><td>");
-        echo($Datos[$f][1]); //FRECUENCIA
+        echo($Datos[$f][1]); // FRECUENCIA
         echo("</td><td>");
-        echo($Datos[$f][2]); //PROMEDIO SIMPLE
+        echo($Datos[$f][2]); // PROMEDIO SIMPLE
         echo("</td><td>");
-        echo($Datos[$f][3]); //ERROR ABSOLUTO
+        echo($Datos[$f][3]); // ERROR ABSOLUTO
         echo("</td><td>");
-        echo($Datos[$f][4]); //CUADRADO
+        echo($Datos[$f][4]); // CUADRADO
         echo("</td><td>");
-        echo($Datos[$f][5]); //PROMEDIO MÓVIL SIMPLE
+        echo($Datos[$f][5]); // PROMEDIO MÓVIL SIMPLE
         echo("</td><td>");
-        echo($Datos[$f][6]); //ERROR ABSOLUTO
+        echo($Datos[$f][6]); // ERROR ABSOLUTO
         echo("</td><td>");
-        echo($Datos[$f][7]); //CUADRADO
+        echo($Datos[$f][7]); // CUADRADO
         echo("</td><td>");
-        echo($Datos[$f][8]); //PROMEDIO MÓVIL DOBLE
+        echo($Datos[$f][8]); // PROMEDIO MÓVIL DOBLE
         echo("</td><td>");
-        echo($Datos[$f][9]); //ERROR ABSOLUTO
+        echo($Datos[$f][9]); // ERROR ABSOLUTO
         echo("</td><td>");
-        echo($Datos[$f][10]); //CUADRADO
+        echo($Datos[$f][10]); // CUADRADO
         echo("</td><td>");
-        echo($Datos[$f][11]); //PROMEDIO MÓVIL DOBLE AJUSTADO
+        echo($Datos[$f][11]); // PROMEDIO MÓVIL DOBLE AJUSTADO
         echo("</td><td>");
-        echo($Datos[$f][12]); //ERROR ABSOLUTO
+        echo($Datos[$f][12]); // ERROR ABSOLUTO
         echo("</td><td>");
-        echo($Datos[$f][13]); //CUADRADO
+        echo($Datos[$f][13]); // CUADRADO
         echo("</td><td>");
-        echo($Datos[$f][14]); //TASA MEDIA DE CRECIMIENTO
+        echo($Datos[$f][14]); // TASA MEDIA DE CRECIMIENTO
         echo("</td><td>");
-        echo($Datos[$f][15]); //PRONÓSTICO DE TASA MEDIA DE CRECIMIENTO
+        echo($Datos[$f][15]); // PRONÓSTICO DE TASA MEDIA DE CRECIMIENTO
         echo("</td><td>");
-        echo($Datos[$f][16]); //ERROR ABSOLUTO
+        echo($Datos[$f][16]); // ERROR ABSOLUTO
         echo("</td><td>");
-        echo($Datos[$f][17]); //CUADRADO
+        echo($Datos[$f][17]); // CUADRADO
         echo("</td><td>");
-        echo($Datos[$f][18]); //SUAVIZADO EXPONENCIAL
+        echo($Datos[$f][18]); // SUAVIZADO EXPONENCIAL
         echo("</td><td>");
-        echo($Datos[$f][19]); //ERROR ABSOLUTO
+        echo($Datos[$f][19]); // ERROR ABSOLUTO
         echo("</td><td>");
-        echo($Datos[$f][20]); //CUADRADO
+        echo($Datos[$f][20]); // CUADRADO
         echo("</td></tr>");
     }
 
-    //Mostrar Errores
+    // Mostrar Errores
     echo("<tr><td>");
     echo($Total+2);
     echo("</td><td></td><td></td><td>Error Medio</td><td>");
@@ -517,7 +507,7 @@
     echo($Error_Cuadratico_Medio[5]);
     echo("</td></tr>");
 
-    //Estilos de la Tabla
+    // Estilos de la Tabla
     echo("</table><br>");
     echo("
         <style>
@@ -528,27 +518,67 @@
             table {
                 font-weight: 600;
                 border-collapse: collapse;
-                width: 40%;
+                width: 50%;
                 border: 1px solid #372869;
                 margin-left: auto;
                 margin-right: auto;
             }
             th{
                 text-align: center;
-                padding: 10px;
+                padding: 10px 30px;
                 background-color: #372869;
                 color: #fff;
             }
             td {
                 border: 1px solid #5f27cd;
                 text-align: center;
-                padding: 7px;
+                padding: 15px 7px;
             }
             tr:nth-child(even) {
                 background-color: rgba(140, 122, 230, 0.7);
             }
             tr:nth-child(odd) {
                 background-color: rgba(156, 136, 255, 0.3);
+            }
+            .row {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .column1 {
+                flex: 10%;
+                padding: 1% 4%;
+                margin-left: 5%;
+                margin-right: -15%;
+                background-color: #372869;
+                border: none;
+                border-radius: 100px;
+                color: #fff;
+                font-weight: 600;
+                font-size: large;
+                text-decoration: none;
+            }
+            .column2 {
+                flex: 150%;
+                padding: 30px 0;
+                z-index: -1;
+            }
+            .column1:hover{
+                color: white;
+                background-color: rgba(140, 122, 230, 0.7);
+                color: #000;
+                border: white 0px solid;
+                cursor: pointer;
+            }
+            .column1:active{
+                padding: 0.8% 3.5%;
+                margin-right: -14.5%;
+                margin-left: 5.5%;
+                color: white;
+                background-color: rgba(140, 122, 230, 0.7);
+                color: #000;
+                border: white 0px solid;
+                cursor: pointer;
             }
         </style>
     ");
@@ -580,22 +610,22 @@
         }
     }
 
-    //Errores Mínimos
-    echo("<br>Error Medio: ");
+    // Errores Mínimos
+    echo("<br><h4>Error Medio: ");
     echo(min($Error_Medio));
     echo(" - ");
     echo($Pronostico[0]);
-    echo("<br><br>Error Relativo: ");
+    echo("</h4><h4>Error Relativo: ");
     echo(min($Error_Relativo));
     echo(" - ");
     echo($Pronostico[1]);
-    echo("<br><br>Error Cuadrático Medio: ");
+    echo("</h4><h4>Error Cuadrático Medio: ");
     echo(min($Error_Cuadratico_Medio));
     echo(" - ");
     echo($Pronostico[2]);
-    echo("<br><br><br>");
+    echo("</h4>");
 
-    //Cerrar Conexion
+    // Cerrar Conexion
     mysqli_close($Conexion);
 
     $_SESSION['tabla'] = $TABLA;
@@ -606,9 +636,9 @@
     $_SESSION['pronostico'] = $PRONOSTICO;
     $_SESSION["Datos"] = $Datos;
 
-    include("./Grafico1_259663.php");
+    // include("./Grafico1.php");
     echo("<br>");
-    include("./Grafico2_259663.php");
+    include("./Grafico2.php");
 
                 }else{
                     echo("<br>El valor de ALFA es incorrecto<br>");
@@ -622,4 +652,5 @@
     }else{
         echo("<br>El valor de K es incorrecto<br>");
     }
+    
 ?>

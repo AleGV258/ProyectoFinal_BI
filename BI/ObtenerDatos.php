@@ -1,10 +1,11 @@
 <?php
-    /* 
-    Nombre: Michell Alejandro García Vargas
-    Expediente: 259663
-    Grupo: 30
-    Semestre: 7mo
-    */
+
+    // PROYECTO FINAL
+    // MATERIA: Inteligencia de Negocios 
+    // INTEGRANTES: 
+    //     - García Vargas Michell Alejandro - 259663
+    //     - Jiménez Elizalde Andrés - 259678
+    //     - León Paulin Daniel - 260541
 
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
@@ -37,4 +38,5 @@
     $NewDate = date('Y-m-d', strtotime($Fila_OD[0]. ' + 1 months'));
     $Data = $Data."['$NewDate', $Fila_OD[1], ".$_SESSION["Datos"][$Total][2].", ".$_SESSION["Datos"][$Total][5].", ".$_SESSION["Datos"][$Total][8].", ".$_SESSION["Datos"][$Total][11].", ".$_SESSION["Datos"][$Total][15].", ".$_SESSION["Datos"][$Total][18]."]";
     print($Data);
+    
 ?>

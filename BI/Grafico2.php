@@ -2,6 +2,16 @@
     <head>
         <script src="https://code.highcharts.com/highcharts.js"></script>
     </head>
+
+    <!-- 
+        PROYECTO FINAL
+        MATERIA: Inteligencia de Negocios 
+        INTEGRANTES: 
+            - García Vargas Michell Alejandro - 259663
+            - Jiménez Elizalde Andrés - 259678
+            - León Paulin Daniel - 260541
+    -->
+
     <body>
         <div id="container" style="width: 100%; height: 400px;"></div>
     </body>
@@ -23,15 +33,7 @@
     title: { 
         text: '<?php 
                 switch($TABLA){
-                  case 'Salarios_Minimos': echo("Salarios Mínimos"); break;
-                  case 'Esperanza_Vida': echo("Esperanza de Vida"); break;
-                  case 'Mortalidad': echo("Mortalidad"); break;
-                  case 'Suicidios': echo("Suicidios"); break;
-                  case 'Piramide_Poblacion': echo("Piramide de Población"); break;
                   case 'Temperatura_Maxima': echo("Temperatura Máxima"); break;
-                  case 'Carne_Cerdo': echo("Carne de Cerdo"); break;
-                  case 'Valor_Bitcoin': echo("Valor del Bitcoin"); break;
-                  case 'Acciones_Apple': echo("Acciones de Apple"); break;
                   case 'Acciones_Google': echo("Acciones de Google"); break;
                 }
             ?>'

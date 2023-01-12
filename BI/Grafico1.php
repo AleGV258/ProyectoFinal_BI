@@ -1,9 +1,12 @@
 <html>
+
     <!-- 
-    Nombre: Michell Alejandro García Vargas
-    Expediente: 259663
-    Grupo: 30
-    Semestre: 7mo 
+        PROYECTO FINAL
+        MATERIA: Inteligencia de Negocios 
+        INTEGRANTES: 
+            - García Vargas Michell Alejandro - 259663
+            - Jiménez Elizalde Andrés - 259678
+            - León Paulin Daniel - 260541
     -->
 
     <head>
@@ -15,22 +18,14 @@
         function drawChart() {
           var data = google.visualization.arrayToDataTable([
 <?php
-            include("./ObtenerDatos_259663.php");
+            include("./ObtenerDatos.php");
 ?>
           ]);
 
           var options = {
             title: '<?php 
                 switch($TABLA){
-                  case 'Salarios_Minimos': echo("Salarios Mínimos"); break;
-                  case 'Esperanza_Vida': echo("Esperanza de Vida"); break;
-                  case 'Mortalidad': echo("Mortalidad"); break;
-                  case 'Suicidios': echo("Suicidios"); break;
-                  case 'Piramide_Poblacion': echo("Piramide de Población"); break;
                   case 'Temperatura_Maxima': echo("Temperatura Máxima"); break;
-                  case 'Carne_Cerdo': echo("Carne de Cerdo"); break;
-                  case 'Valor_Bitcoin': echo("Valor del Bitcoin"); break;
-                  case 'Acciones_Apple': echo("Acciones de Apple"); break;
                   case 'Acciones_Google': echo("Acciones de Google"); break;
                 }
             ?>',
@@ -53,7 +48,7 @@
       </script>
     </head>
     <body>
-      <p>Ir al archivo de configuracion para establecer las variables ↓</p>
+      <!-- <p>Ir al archivo de configuracion para establecer las variables ↓</p> -->
       <div id="curve_chart" style="width: 50%; height: 60vh; font-family: 'verdana'; margin: 0 0 32% -11%; z-index: 1; position: relative;"></div>
     </body>
 </html>
