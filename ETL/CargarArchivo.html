@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Análisis</title>
+        <title>Integración</title>
     </head>
 
     <!-- 
@@ -19,33 +19,25 @@
     <body>
         <div class='row'>
             <a class='column1' href='../Sistema/MenuPrincipal.php'>Regresar</a>
-            <label class="column2">Series Temporales</label><br><br>
+            <label class="column2">Cargar Archivo</label><br><br>
         </div>
-        <form action="./Conexion.php" method="GET">
-            <label for="tabla">Tabla:</label><br>
-            <select class="inputdata" name="tabla" id="tabla" placeholder="Tabla para la Consulta">
-                <option value="Temperatura_Maxima">Temperatura Máxima de Querétaro</option>
-                <option value="Acciones_Google">Acciones de Google</option>
-            </select><br><br>
-            <label for="k">K:</label><br>
-            <input class="inputdata" type="text" name="k" id="k" placeholder="Valor de K" required><br><br>
-            <label for="j">J:</label><br>
-            <input class="inputdata" type="text" name="j" id="j" placeholder="Valor de J" required><br><br>
-            <label for="m">M:</label><br>
-            <input class="inputdata" type="text" name="m" id="m" placeholder="Valor de M" required><br><br>
-            <label for="a">A (Alfa):</label><br>
-            <input class="inputdata" type="text" name="a" id="a" placeholder="Valor de ALFA" required><br><br>
-            <label for="pronostico">Pronóstico:</label><br>
-            <select class="inputdata" name="pronostico" id="pronostico" placeholder="Pronostico Seleccionado" required>
-                <option value="PS">Promedio Simple</option>
-                <option value="PMS">Promedio Móvil Simple</option>
-                <option value="PMD">Promedio Móvil Doble</option>
-                <option value="PMDA">Promedio Móvil Doble Ajustado</option>
-                <option value="PTMAC">Pronóstico de Tasa Media de Crecimiento</option>
-            </select><br><br>
-            <input class="inputdata" type="submit" style="margin: 5% 0 5% 0; font-size: 200%;">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <form action="./IntegracionArchivo.php" method="POST" enctype="multipart/form-data">
+            <label for="archivo">Archivo:</label><br>
+            <label class="uploadLabel inputdata" for="Archivo">
+                Sube un archivo (.txt, .csv, .xlsx, .kml, .dbf)
+            </label>
+            <input type="file" required name="Archivo" id="Archivo"/><br>
+            <input value="Cargar" class="inputdata" type="submit" id="SubirArchivo" name="SubirArchivo" style="margin: 5% 0 5% 0; font-size: 200%;">
         </form><br><br><br>
     </body>
+    <script>
+        $('#Archivo').change(function() {
+            var i = $(this).prev('label').clone();
+            var file = $('#Archivo')[0].files[0].name;
+            $(this).prev('label').text(file);
+        });
+    </script>
 </html>
 
 <style>
@@ -71,18 +63,32 @@
         font-size: large;
         font-weight: 600;
         padding: 3% 0.8%;
-        margin: 0 0 2% 0;
+        margin: 2% 0 2% 0;
         border-radius: 10px;
         text-align: center;
         outline: none;
         border: none;
         cursor: pointer;
     }
+    .inputdata:hover{
+        background-color: rgba(140, 122, 230, 0.7);
+    }
     input[type="submit"]:hover{
         background-color: rgba(140, 122, 230, 0.7);
     }
     input[type="submit"]:active{
         color: white;
+    }
+    input[type="file"]{
+        display: none;
+    }
+    .uploadLabel {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 7px 15px;
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: center;
     }
     .row {
         display: grid;

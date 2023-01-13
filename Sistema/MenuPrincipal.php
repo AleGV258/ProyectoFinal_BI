@@ -27,7 +27,7 @@
             </div>
             <div class="cards">
                 <div class="card">
-                    <a class="opcion" href="#">Integración</a>
+                    <a class="opcion" href="../ETL/CargarArchivo.html">Integración</a>
                 </div>
                 <div class="card">
                     <a class="opcion" href="../BI/Configuracion.html">Análisis</a>
@@ -72,7 +72,7 @@
         .opcion{
             padding: 4% 30%;
             border: none;
-            border-radius: 100px;
+            border-radius: 10px;
             color: #000;
             font-weight: 600;
             font-size: x-large;
