@@ -1,17 +1,16 @@
 <?php
-// session_start();
+session_start();
 // if (isset($_SESSION['Usuario'])) {
 
 // EJEMPLO LINK: http://localhost/ProyectoFInal/Proyecto_InteligenciaNegocios/Sistema/estadisticas.php?NombreArchivo=ArchivoX&Errores=10&Insertados=90&Total=100&TipoArchivo=SDS
 // || aqui depende del path                   ||        
 
-$NombreArchivo = $_GET['NombreArchivo']; //Nombre del archivo
-$TipoArchivo = $_GET['TipoArchivo']; //Tipo de archivo
-$Errores = $_GET['Errores']; //Cantidad de errores encontrados
-$Insertados = $_GET['Insertados']; //Cantidad de inserts correctos
-$Total = $_GET['Total']; //Cantidad total de filas que estaban en el archivo
-
-$filtroParams = "?NombreArchivo=$NombreArchivo&TipoArchivo=$TipoArchivo&Errores=$Errores&Insertados=$Insertados&Total=$Total";
+$array = $_SESSION['arrayEstadisticas'];
+$NombreArchivo = $array[0];  //Nombre del archivo
+$TipoArchivo = $array[1];  //Tipo de archivo
+$Total = $array[2];  //Cantidad total de filas que estaban en el archivo
+$Insertados = $array[3];  //Cantidad de inserts correctos
+$Errores = $array[4];  //Cantidad de errores encontrados
 
 $PorcentajeInsertados = intval($Insertados / $Total * 100); //PorcentajeInsertados de datos insertados
 $PorcentajeErrores = intval($Errores / $Total * 100); //PorcentajeInsertados de datos no insertados
@@ -36,11 +35,11 @@ $PorcentajeErrores = intval($Errores / $Total * 100); //PorcentajeInsertados de 
         <div id="dato">
             Tipo de archivo: <strong><?php echo $TipoArchivo; ?></strong>
         </div>
-        <div id="dato">
-            <a href="../ETL/FFiltro.html <?php echo $filtroParams; ?>">
+        <!-- <div id="dato">
+            <a href="../ETL/FFiltro.html ">
                 <input id="filtro" type="button" value="Aplicar Filtro" />
             </a>
-        </div>
+        </div> -->
 
 
     </div>
@@ -73,6 +72,44 @@ $PorcentajeErrores = intval($Errores / $Total * 100); //PorcentajeInsertados de 
             Se han detectado <strong><?php echo $Errores; ?></strong> datos que no se pudieron insertar correctamente a la base de datos.
 
         </div>
+    </div>
+    <div>
+        <form action="./AplicarFiltro.php" method="post">
+
+            <label for="">Selecciona los filtros que serán aplicados</label><br><br>
+
+            <input type="checkbox" name="CVE_ENT" id="CVE_ENT">
+            <label for="CVE_ENT"> CVE_ENT </label><br>
+
+            <input type="checkbox" name="AMBITO" id="AMBITO">
+            <label for="AMBITO"> AMBITO </label><br>
+
+            <input type="checkbox" name="MAPA" id="MAPA">
+            <label for="MAPA"> MAPA </label><br>
+
+            <input type="checkbox" name="CVE_MUN" id="CVE_MUN">
+            <label for="CVE_MUN"> CVE_MUN </label><br>
+
+            <input type="checkbox" name="CVE_LOC" id="CVE_LOC">
+            <label for="CVE_LOC"> CVE_LOC </label><br>
+
+            <input type="checkbox" name="ALTITUD" id="ALTITUD">
+            <label for="ALTITUD"> ALTITUD </label><br>
+
+            <input type="checkbox" name="LAT_DECIMAL" id="LAT_DECIMAL">
+            <label for="LAT_DECIMAL"> LAT_DECIMAL </label><br>
+
+            <input type="checkbox" name="LONG_DECIMAL" id="LONG_DECIMAL">
+            <label for="LONG_DECIMAL"> LONG_DECIMAL </label><br>
+
+            <input type="checkbox" name="NOM_ENT" id="NOM_ENT">
+            <label for="NOM_ENT"> NOM_ENT </label><br>
+
+            <input type="checkbox" name="NOM_ABR" id="NOM_ABR">
+            <label for="NOM_ABR"> NOM_ABR </label><br><br>
+
+            <input type="submit" value="Continuar">
+        </form>
     </div>
     <style>
         #filtro {

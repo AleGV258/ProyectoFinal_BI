@@ -27,6 +27,10 @@ class ComposerStaticInit1e3d9ee78a0d51711565fbe3e7ee2ad5
             'MyCLabs\\Enum\\' => 13,
             'Matrix\\' => 7,
         ),
+        'D' => 
+        array (
+            'Danie\\Etl\\' => 10,
+        ),
         'C' => 
         array (
             'Complex\\' => 8,
@@ -44,8 +48,8 @@ class ComposerStaticInit1e3d9ee78a0d51711565fbe3e7ee2ad5
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -62,6 +66,10 @@ class ComposerStaticInit1e3d9ee78a0d51711565fbe3e7ee2ad5
         'Matrix\\' => 
         array (
             0 => __DIR__ . '/..' . '/markbaker/matrix/classes/src',
+        ),
+        'Danie\\Etl\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
         ),
         'Complex\\' => 
         array (

@@ -75,11 +75,12 @@
     fgets($ManejadorKML);
 
     $Contador = 0;
+    $Contador2 = 0;
     $Linea = fgets($ManejadorKML);
     while($Linea = fgets($ManejadorKML)){
+        $Contador++;
         if($Linea != ""){
-            $Contador++;
-
+            $Contador2++;
             preg_match_all('#<value>(.+?)</value>#', $Linea, $Subcadenas);
             $Valores = "'',";
             for($i = 0; $i < count($Subcadenas[1]); $i++){
@@ -99,6 +100,14 @@
     fclose($ManejadorKML);
     mysqli_close($Con);
     unlink($Archivo);
-    header('Location: ../Sistema/Estadisticas.php');
+
+    $NombreArchivo = $_SESSION['ArchivoNombre'];
+    $TipoArchivo = $_SESSION['ArchivoExtension'];
+    $Total = $Contador;
+    $Insertados = $Contador2;
+    $Errores = $Contador - $Contador2;
+    $array = array($NombreArchivo, $TipoArchivo, $Total, $Insertados, $Errores, $array);
+    $_SESSION['arrayEstadisticas'] = $array;
+    header("Location: ../Sistema/Estadisticas.php");
 
 ?>

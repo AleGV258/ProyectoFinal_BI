@@ -75,9 +75,11 @@
     fgets($ManejadorTXT);
 
     $Contador = 0;
+    $Contador2 = 0;
     while($Linea = fgets($ManejadorTXT)){
+        $Contador++;
         if($Linea != ""){
-            $Contador++;
+            $Contador2++;
             $Subcadenas = explode('"', $Linea);
             $Valores = "'',";
             for($i = 1; $i < count($Subcadenas); $i+=2){
@@ -102,5 +104,14 @@
     mysqli_close($Con);
     unlink($Archivo);
     header('Location: ../Sistema/Estadisticas.php');
+
+    $NombreArchivo = $_SESSION['ArchivoNombre'];
+    $TipoArchivo = $_SESSION['ArchivoExtension'];
+    $Total = $Contador;
+    $Insertados = $Contador2;
+    $Errores = $Contador - $Contador2;
+    $array = array($NombreArchivo, $TipoArchivo, $Total, $Insertados, $Errores, $array);
+    $_SESSION['arrayEstadisticas'] = $array;
+    header("Location: ../Sistema/Estadisticas.php");
 
 ?>

@@ -83,6 +83,7 @@
     $sheet = $spreadsheet->getActiveSheet();
 
     $Contador = 0;
+    $Contador2 = 0;
     foreach($sheet->getRowIterator() as $ManejadorXLSX){
         $Contador++;
         if($Contador > 3){
@@ -99,6 +100,7 @@
                     }
                 }
             }
+            $Contador2++;
             $Valores = substr($Valores, 0, -1);
             $SQL = "INSERT INTO mar11 VALUES (".$Valores.");";
             mysqli_query($Con, $SQL);
@@ -107,6 +109,14 @@
 
     mysqli_close($Con);
     unlink($Archivo);
-    header('Location: ../Sistema/Estadisticas.php');
+    
+    $NombreArchivo = $_SESSION['ArchivoNombre'];
+    $TipoArchivo = $_SESSION['ArchivoExtension'];
+    $Total = $Contador;
+    $Insertados = $Contador2;
+    $Errores = $Contador - $Contador2;
+    $array = array($NombreArchivo, $TipoArchivo, $Total, $Insertados, $Errores, $array);
+    $_SESSION['arrayEstadisticas'] = $array;
+    header("Location: ../Sistema/Estadisticas.php");
 
 ?>
