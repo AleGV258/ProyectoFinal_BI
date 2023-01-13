@@ -1,6 +1,20 @@
 {
+    "name": "danie/etl",
+    "description": "proyecto final bi",
+    "autoload": {
+        "psr-4": {
+            "Danie\\Etl\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Daniel Leon Paulin",
+            "email": "dleon29@alumnos.uaq.mx"
+        }
+    ],
     "require": {
-        "phpoffice/phpspreadsheet": "^1.25",
-        "hisamu/php-xbase": "^2.1"
+        "hisamu/php-xbase": "^2.1",
+        "box/spout": "^3.3",
+        "phpoffice/phpspreadsheet": "^1.26"
     }
 }

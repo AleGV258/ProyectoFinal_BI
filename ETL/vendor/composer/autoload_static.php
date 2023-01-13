@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit1e3d9ee78a0d51711565fbe3e7ee2ad5
+class ComposerStaticInit1a7abe5be89c70827f48ae75c4998767
 {
     public static $files = array (
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
@@ -14,6 +14,10 @@ class ComposerStaticInit1e3d9ee78a0d51711565fbe3e7ee2ad5
         'Z' => 
         array (
             'ZipStream\\' => 10,
+        ),
+        'X' => 
+        array (
+            'XBase\\' => 6,
         ),
         'P' => 
         array (
@@ -35,6 +39,10 @@ class ComposerStaticInit1e3d9ee78a0d51711565fbe3e7ee2ad5
         array (
             'Complex\\' => 8,
         ),
+        'B' => 
+        array (
+            'Box\\Spout\\' => 10,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -42,14 +50,18 @@ class ComposerStaticInit1e3d9ee78a0d51711565fbe3e7ee2ad5
         array (
             0 => __DIR__ . '/..' . '/maennchen/zipstream-php/src',
         ),
+        'XBase\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hisamu/php-xbase/src',
+        ),
         'Psr\\SimpleCache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -75,6 +87,10 @@ class ComposerStaticInit1e3d9ee78a0d51711565fbe3e7ee2ad5
         array (
             0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
         ),
+        'Box\\Spout\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/box/spout/src/Spout',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -95,10 +111,10 @@ class ComposerStaticInit1e3d9ee78a0d51711565fbe3e7ee2ad5
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit1e3d9ee78a0d51711565fbe3e7ee2ad5::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit1e3d9ee78a0d51711565fbe3e7ee2ad5::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit1e3d9ee78a0d51711565fbe3e7ee2ad5::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit1e3d9ee78a0d51711565fbe3e7ee2ad5::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit1a7abe5be89c70827f48ae75c4998767::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit1a7abe5be89c70827f48ae75c4998767::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit1a7abe5be89c70827f48ae75c4998767::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit1a7abe5be89c70827f48ae75c4998767::$classMap;
 
         }, null, ClassLoader::class);
     }

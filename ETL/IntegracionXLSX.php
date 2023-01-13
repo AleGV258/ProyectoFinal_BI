@@ -120,3 +120,50 @@
     header("Location: ../Sistema/Estadisticas.php");
 
 ?>
+// require "vendor/autoload.php";
+    // use PhpOffice\PhpSpreadsheet\Spreadsheet;
+
+    // session_start();
+    // $Archivo = $_SESSION['ArchivoSubido'];
+    // // echo $Archivo;
+    // require 'vendor/autoload.php';
+
+    // use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
+
+    // $path = $Archivo;
+    // # open the file
+    // $reader = ReaderEntityFactory::createXLSXReader();
+    // $reader->open($path);
+
+    // $Con = mysqli_connect('127.0.0.1', 'root', '', 'cucage');
+    // mysqli_query($Con, "TRUNCATE mar11;");
+  
+    // foreach ($reader->getSheetIterator() as $sheet) {
+    //     $contador=1;
+    //     $Contador2 = 0;
+    //     foreach ($sheet->getRowIterator() as $row) {
+    //         if($contador >4){
+                
+    //             $Valores = "'',";
+    //             foreach ($row->getCells() as $cell) {
+    //                 $valor = str_replace("'", "\'", $cell->getValue());
+    //                 $Valores = $Valores . "'" . $valor . "',";
+    //                 // var_dump($cell->getValue());
+    //                 //echo $cell->getValue();
+    //             }
+    //             $Valores = substr($Valores, 0, -1);
+                
+    //             $SQL = "INSERT INTO mar11 VALUES (".$Valores.");";
+    //             // echo $SQL . "<br>";
+
+    //             $Result = mysqli_query($Con, $SQL);
+    //             // // if($Result <> 0){
+    //             // echo $Result . "<br>";
+    //             // // }                            
+    //         }
+    //         $contador ++;
+    //         $Contador2 ++;
+    //     }
+    // }
+    // $reader->close();
+    // mysqli_close($Con);
