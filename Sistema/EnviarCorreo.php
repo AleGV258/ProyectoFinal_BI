@@ -33,12 +33,12 @@
                 WHERE Tipo = 'A';";
 
             $Result = mysqli_query($Con, $SQL);
-            $Total = mysqli_num_rows($Result);
-            for ($f = 0; $f < $Total; $f++) {
-                $Fila = mysqli_fetch_row($Result);
-                $mail->addAddress($Fila[2]);  // Envia correo a todos los Administradores
-            }
-            $mail->addAttachment($archivoPDF);  // Agrega el archivoPDF al correo
+            // $Total = mysqli_num_rows($Result);
+            // for ($f = 0; $f < $Total; $f++) {
+            //     $Fila = mysqli_fetch_row($Result);
+            //     $mail->addAddress($Fila[2]);  // Envia correo a todos los Administradores
+            // }
+            // $mail->addAttachment($archivoPDF);  // Agrega el archivoPDF al correo
 
             // Content
             date_default_timezone_set('America/Mexico_City'); 

@@ -18,7 +18,7 @@
             
             $ExtensionesPermitidas = array('txt', 'csv', 'xlsx', 'kml', 'dbf');
             if(in_array($ArchivoExtension, $ExtensionesPermitidas)) {
-                // Crear carpeta archivosSubidos en caso de no existir
+                // Crear carpeta ArchivosSubidos en caso de no existir
                 $path = './ArchivosSubidos';
                 if (!file_exists($path)) {
                     mkdir($path, 0777, true);
@@ -26,38 +26,37 @@
                 // Directorio donde se va a mover el archivo movido
                 $Archivo = $path . '/' . $ArchivoNombre;
 
-
                 if(move_uploaded_file($ArchivoRutaTemporal, $Archivo)){
 ?>
-                    <script>alert("El Archivo se ha cargado con éxito");</script>
+                    <script>alert("El Archivo se ha cargado con éxito, ahora comenzará su carga");</script>
 <?php
+                    session_start();
+                    $_SESSION['ArchivoSubido'] = $Archivo;
+                    $_SESSION['ArchivoNombre'] = $ArchivoNombre;
+                    $_SESSION['ArchivoTamano'] = $ArchivoTamano;
+                    $_SESSION['ArchivoExtension'] = $ArchivoExtension;
+                    switch ($ArchivoExtension) {
+                        case 'txt':
+                            header('Location: ./IntegracionTXT.php');
+                            break;
+                        case 'csv':
+                            header('Location: ./IntegracionCSV.php');
+                            break;
+                        case 'xlsx':
+                            header('Location: ./IntegracionXLSX.php');
+                            break;
+                        case 'kml':
+                            header('Location: ./IntegracionKML.php');
+                            break;
+                        case 'dbf':
+                            header('Location: ./IntegracionDBF.php');
+                            break;
+                    }
                 }else{
 ?>
-                    <script>alert("Lo sentimos, el Archivo no se ha podido cargar correctamente, intente de nuevo más tarde"); window.location.href = "./CargarArchivo.html";</script>
+                    <script>alert("Lo sentimos, el Archivo no se ha podido cargar correctamente, intente de nuevo más tarde");</script>
 <?php
-                }
-
-                session_start();
-                $_SESSION['ArchivoSubido'] = $Archivo;
-                $_SESSION['ArchivoNombre'] = $ArchivoNombre;
-                $_SESSION['ArchivoTamano'] = $ArchivoTamano;
-                $_SESSION['ArchivoExtension'] = $ArchivoExtension;
-                switch ($ArchivoExtension) {
-                    case 'txt':
-                        header('Location: ./IntegracionTXT.php');
-                        break;
-                    case 'csv':
-                        header('Location: ./IntegracionCSV.php');
-                        break;
-                    case 'xlsx':
-                        header('Location: ./IntegracionXLSX.php');
-                        break;
-                    case 'kml':
-                        header('Location: ./IntegracionKML.php');
-                        break;
-                    case 'dbf':
-                        header('Location: ./IntegracionDBF.php');
-                        break;
+                    header('Location: ./CargarArchivo.html');
                 }
             }
         }
