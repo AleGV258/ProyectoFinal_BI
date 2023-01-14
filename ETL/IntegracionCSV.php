@@ -43,16 +43,16 @@
             $SQL = "INSERT INTO mar11 VALUES (" . $Valores . ");";
             mysqli_query($Con, $SQL);
         }
-        $Total = $Contador;
-        $Insertados = $Contador2;
-        $Errores = $Contador - $Contador2;
-        $array = array($NombreArchivo, $TipoArchivo, $Total, $Insertados, $Errores, $array);
-        $_SESSION['arrayEstadisticas'] = $array;
     }
-
+    
     fclose($ManejadorCSV);
     mysqli_close($Con);
     unlink($Archivo);
+    $Total = $Contador;
+    $Insertados = $Contador2;
+    $Errores = $Contador - $Contador2;
+    $array = array($NombreArchivo, $TipoArchivo, $Total, $Insertados, $Errores, $array);
+    $_SESSION['arrayEstadisticas'] = $array;
     header("Location: ../Sistema/Estadisticas.php");
 
 ?>
