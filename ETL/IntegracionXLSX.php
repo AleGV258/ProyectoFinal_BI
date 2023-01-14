@@ -31,7 +31,7 @@
     $Contador2 = 0;
     foreach($sheet->getRowIterator() as $ManejadorXLSX){
         $Contador++;
-        if($Contador > 3){
+        if($Contador > 4){
             $Valores = "'',";
             $cellIterator = $ManejadorXLSX->getCellIterator();
             $cellIterator->setIterateOnlyExistingCells(false);
@@ -48,6 +48,7 @@
             $Contador2++;
             $Valores = substr($Valores, 0, -1);
             $SQL = "INSERT INTO mar11 VALUES (".$Valores.");";
+            echo $SQL;
             mysqli_query($Con, $SQL);
         }
         $Total = $Contador;
