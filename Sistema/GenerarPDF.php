@@ -1,97 +1,183 @@
 <?php
 
-// PROYECTO FINAL
-// MATERIA: Inteligencia de Negocios 
-// INTEGRANTES: 
-//     - García Vargas Michell Alejandro - 259663
-//     - Jiménez Elizalde Andrés - 259678
-//     - León Paulin Daniel - 260541
+    // PROYECTO FINAL
+    // MATERIA: Inteligencia de Negocios 
+    // INTEGRANTES: 
+    //     - García Vargas Michell Alejandro - 259663
+    //     - Jiménez Elizalde Andrés - 259678
+    //     - León Paulin Daniel - 260541
 
-require('fpdf.php');
-// require('./EnviarCorreo.php'); //SE DEBE PONER ANTES DEL REQUIRE DE generarPDF POR QUE SINO NO LO IMPLEMENTA BIEN
+    require('fpdf.php');
 
-function integracionPDF($NombreArchivo, $TipoArchivo, $CErrores, $Insertados, $Total, $Filtro, $Errores)
-{
-    $PorcentajeInsertados = intval($Insertados / $Total * 100); // PorcentajeInsertados de datos insertados
-    $PorcentajeErrores = intval($CErrores / $Total * 100); // PorcentajeInsertados de datos no insertados
+    function integracionPDF($NombreArchivo, $TipoArchivo, $CErrores, $Insertados, $Total, $Filtro, $Errores, $Correo, $Usuario)
+    {
+        $PorcentajeInsertados = intval($Insertados / $Total * 100); // PorcentajeInsertados de datos insertados
+        $PorcentajeErrores = intval($CErrores / $Total * 100); // PorcentajeInsertados de datos no insertados
 
-    $pdf = new FPDF();
-    $pdf->AddPage();
-    $pdf->SetFont('Arial', 'B', 16);
+        $pdf = new FPDF();              
+        $pdf->AddPage(); // Width: 208
 
-    $pdf->SetXY(31, 20);
-    $pdf->Cell(25, 3, 'Nombre del archivo: ' . $NombreArchivo, 0, 2, 'L');
-    $pdf->SetXY(31, 27);
-    $pdf->Cell(25, 3, 'Tipo de archivo: ' . $TipoArchivo, 0, 2, 'L');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(0, 20);
+        $pdf->Cell(215, 3, "Proyecto Final Inteligencia de Negocios", 0, 2, 'C');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(0, 27);
+        $pdf->Cell(208, 3, "Materia:                                    ", 0, 2, 'C');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(0, 27);
+        $pdf->Cell(208, 3, "                    Inteligencia de Negocios", 0, 2, 'C');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(0, 34);
+        $pdf->Cell(208, 3, "Maestro:                                              ", 0, 2, 'C');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(0, 34);
+        $pdf->Cell(208, 3, utf8_decode("                       Paulin Martínez Francisco Javier"), 0, 2, 'C');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(0, 41);
+        $pdf->Cell(208, 3, "Integrantes:", 0, 2, 'C');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(0, 48);
+        $pdf->Cell(208, 3, utf8_decode("- García Vargas Michell Alejandro - 259663"), 0, 2, 'C');
+        $pdf->SetXY(0, 55);
+        $pdf->Cell(208, 3, utf8_decode("- Jiménez Elizalde Andrés - 259678"), 0, 2, 'C');
+        $pdf->SetXY(0, 62);
+        $pdf->Cell(208, 3, utf8_decode("- León Paulin Daniel - 260541"), 0, 2, 'C');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(0, 69);
+        $pdf->Cell(208, 3, "Grupo:                      Semestre:", 0, 2, 'C');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(0, 69);
+        $pdf->Cell(208, 3, "                       30                                   7mo.", 0, 2, 'C');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(0, 76);
+        $pdf->Cell(208, 3, "Fecha:                           ", 0, 2, 'C');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(0, 76);
+        $pdf->Cell(208, 3, "                    18 de enero del 2023", 0, 2, 'C');
+        
+        $pdf->SetFont('Arial', 'B', 36); $pdf->SetXY(0, 100);
+        $pdf->Cell(215, 3, utf8_decode("Integración"), 0, 2, 'C');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(50, 122);
+        $pdf->Cell(115, 3, "Usuario:", 0, 2, 'L');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(50, 122);
+        $pdf->Cell(115, 3, $Usuario, 0, 2, 'R');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(50, 129);
+        $pdf->Cell(115, 3, "Correo:", 0, 2, 'L');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(50, 129);
+        $pdf->Cell(115, 3, $Correo, 0, 2, 'R');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(50, 136);
+        $pdf->Cell(115, 3, "Nombre del Archivo:", 0, 2, 'L');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(50, 136);
+        $pdf->Cell(115, 3, $NombreArchivo, 0, 2, 'R');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(50, 143);
+        $pdf->Cell(115, 3, "Tipo de Archivo:", 0, 2, 'L');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(50, 143);
+        $pdf->Cell(115, 3, $TipoArchivo, 0, 2, 'R');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(50, 150);
+        $pdf->Cell(115, 3, "Total de Datos del Archivo:", 0, 2, 'L');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(50, 150);
+        $pdf->Cell(115, 3, $Total, 0, 2, 'R');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(50, 157);
+        $pdf->Cell(115, 3, "Datos Insertados correctamente ($PorcentajeInsertados %).", 0, 2, 'C');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(50, 164);
+        $pdf->Cell(115, 3, "Datos Insertados en la Base de Datos:", 0, 2, 'L');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(50, 164);
+        $pdf->Cell(115, 3, $Insertados, 0, 2, 'R');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(50, 171);
+        $pdf->Cell(115, 3, "Datos No Insertados($PorcentajeErrores %).", 0, 2, 'C');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(50, 178);
+        $pdf->Cell(115, 3, "Datos No Insertados en la Base de Datos:", 0, 2, 'L');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(50, 178);
+        $pdf->Cell(115, 3, $CErrores, 0, 2, 'R');
 
-    $pdf->SetXY(31, 45);
-    $pdf->Cell(25, 3, 'Total de datos que contiene el archivo: ' . $Total . ' . ', 0, 2, 'L');
-    // $pdf->Cell(25, 5, $Total, 0, 0, 'L');
+        $Posicion = 185;
+        for ($i = 0; $i < count($Errores); $i++) {
+            if ($Filtro[$i] != 'NO') {
 
-    $pdf->SetXY(31, 54);
-    $pdf->Cell(25, 3, 'Datos Insertados correctamente (' . $PorcentajeInsertados . '%).', 0, 2, 'L');
-    $pdf->SetXY(48, 60);
-    $pdf->Cell(25, 3, $Insertados . ' datos insertados a la base de datos.', 0, 2, 'L');
+                $pdf->SetXY(50, $Posicion);
+                $Posicion = $Posicion + 7;
+                $pdf->Cell(115, 3, "Filtro '$Filtro[$i]': $Errores[$i] Errores Encontrados.", 0, 2, 'C');
 
-    $pdf->SetXY(31, 70);
-    $pdf->Cell(25, 3, 'Datos no insertados(' . $PorcentajeErrores . '%).', 0, 2, 'L');
-    $pdf->SetXY(48, 76);
-    $pdf->Cell(25, 3, $CErrores . ' datos no insertados debido a un error.', 0, 2, 'L');
-
-    $Posicion = 90;
-    for ($i = 0; $i < count($Errores); $i++) {
-        if ($Filtro[$i] != 'NO') {
-            $pdf->SetXY(31, $Posicion);
-            $Posicion = $Posicion + 9;
-            $pdf->Cell(25, 3, "Filtro '$Filtro[$i]': $Errores[$i] errores encontrados.", 0, 2, 'L');
+            }
         }
+
+        // Crear carpeta ArchivosPDF en caso de no existir
+        $path = '../Sistema/ArchivosPDF';
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+        $archivoPDF = $path . '/Reporte BI - Integración.pdf';
+        $pdf->Output('F', $archivoPDF); // Guardar en carpeta archivosPDF
+
+        // Envia reporte por correo
+        enviarArchivoCorreo($archivoPDF);
     }
-    // $pdf->Output();
-    // Crear carpeta archivosPDF en caso de no existir
-    $path = './archivosPDF';
-    if (!file_exists($path)) {
-        mkdir($path, 0777, true);
+
+    function analisisPDF($tabla, $k, $j, $m, $a, $pronostico, $Correo, $Usuario)
+    {
+        $pdf = new FPDF();              
+        $pdf->AddPage(); // Width: 208
+
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(0, 20);
+        $pdf->Cell(215, 3, "Proyecto Final Inteligencia de Negocios", 0, 2, 'C');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(0, 27);
+        $pdf->Cell(208, 3, "Materia:                                    ", 0, 2, 'C');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(0, 27);
+        $pdf->Cell(208, 3, "                    Inteligencia de Negocios", 0, 2, 'C');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(0, 34);
+        $pdf->Cell(208, 3, "Maestro:                                              ", 0, 2, 'C');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(0, 34);
+        $pdf->Cell(208, 3, utf8_decode("                       Paulin Martínez Francisco Javier"), 0, 2, 'C');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(0, 41);
+        $pdf->Cell(208, 3, "Integrantes:", 0, 2, 'C');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(0, 48);
+        $pdf->Cell(208, 3, utf8_decode("- García Vargas Michell Alejandro - 259663"), 0, 2, 'C');
+        $pdf->SetXY(0, 55);
+        $pdf->Cell(208, 3, utf8_decode("- Jiménez Elizalde Andrés - 259678"), 0, 2, 'C');
+        $pdf->SetXY(0, 62);
+        $pdf->Cell(208, 3, utf8_decode("- León Paulin Daniel - 260541"), 0, 2, 'C');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(0, 69);
+        $pdf->Cell(208, 3, "Grupo:                      Semestre:", 0, 2, 'C');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(0, 69);
+        $pdf->Cell(208, 3, "                       30                                   7mo.", 0, 2, 'C');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(0, 76);
+        $pdf->Cell(208, 3, "Fecha:                           ", 0, 2, 'C');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(0, 76);
+        $pdf->Cell(208, 3, "                    18 de enero del 2023", 0, 2, 'C');
+        
+        $pdf->SetFont('Arial', 'B', 36); $pdf->SetXY(0, 100);
+        $pdf->Cell(215, 3, utf8_decode("Análisis"), 0, 2, 'C');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(50, 122);
+        $pdf->Cell(115, 3, "Usuario:", 0, 2, 'L');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(50, 122);
+        $pdf->Cell(115, 3, $Usuario, 0, 2, 'R');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(50, 129);
+        $pdf->Cell(115, 3, "Correo:", 0, 2, 'L');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(50, 129);
+        $pdf->Cell(115, 3, $Correo, 0, 2, 'R');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(50, 136);
+        $pdf->Cell(115, 3, "Tabla Analizada:", 0, 2, 'L');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(50, 136);
+        $pdf->Cell(115, 3, $tabla, 0, 2, 'R');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(50, 143);
+        $pdf->Cell(115, 3, "Valor de K:", 0, 2, 'L');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(50, 143);
+        $pdf->Cell(115, 3, $k, 0, 2, 'R');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(50, 150);
+        $pdf->Cell(115, 3, "Valor de J:", 0, 2, 'L');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(50, 150);
+        $pdf->Cell(115, 3, $j, 0, 2, 'R');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(50, 157);
+        $pdf->Cell(115, 3, "Valor de M:", 0, 2, 'L');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(50, 157);
+        $pdf->Cell(115, 3, $m, 0, 2, 'R');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(50, 164);
+        $pdf->Cell(115, 3, "Valor de A (Alfa):", 0, 2, 'L');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(50, 164);
+        $pdf->Cell(115, 3, $a, 0, 2, 'R');
+        $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY(50, 171);
+        $pdf->Cell(115, 3, "Valor de Pronostico:", 0, 2, 'L');
+        $pdf->SetFont('Arial', '', 14); $pdf->SetXY(50, 171);
+        $pdf->Cell(115, 3, $pronostico, 0, 2, 'R');
+
+        // Crear carpeta ArchivosPDF en caso de no existir
+        $path = '../Sistema/ArchivosPDF';
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+
+        $archivoPDF =  $path . '/Reporte BI - Análisis.pdf';
+        $pdf->Output('F', $archivoPDF); // Guardar en carpeta archivosPDF
+        // Envia reporte por correo
+        enviarArchivoCorreo($archivoPDF);
     }
-    $archivoPDF = $path . '/Integracion.pdf';
-    $pdf->Output('F', $archivoPDF); // Guardar en carpeta archivosPDF
-
-    // Envia reporte por correo
-    enviarArchivoCorreo($archivoPDF);
-}
-function analisisPDF($tabla, $k, $j, $m, $a, $pronostico, $Correo, $Usuario)
-{
-    $pdf = new FPDF();
-    $pdf->AddPage();
-    $pdf->SetFont('Arial', 'B', 16);
-
-    $pdf->SetXY(31, 20);
-    $pdf->Cell(25, 3, "Usuario: '" . $Usuario . "'", 0, 2, 'L');
-
-    $pdf->SetXY(31, 30);
-    $pdf->Cell(25, 3, "Correo: " .  $Correo, 0, 2, 'L');
-    $pdf->SetXY(31, 40);
-    $pdf->Cell(25, 3, 'Tabla Analizada: ' . $tabla, 0, 2, 'L');
-    $pdf->SetXY(31, 50);
-    $pdf->Cell(25, 3, 'Valor de K: ' . $k, 0, 2, 'L');
-    $pdf->SetXY(31, 60);
-    $pdf->Cell(25, 3, 'Valor de J: ' . $j, 0, 2, 'L');
-    $pdf->SetXY(31, 70);
-    $pdf->Cell(25, 3, 'Valor de M: ' . $m, 0, 2, 'L');
-    $pdf->SetXY(31, 80);
-    $pdf->Cell(25, 3, 'Valor de A: ' . $a, 0, 2, 'L');
-    $pdf->SetXY(31, 90);
-    $pdf->Cell(25, 3, 'Valor de Pronostico: ' . $pronostico, 0, 2, 'L');
-
-    $path = '../Sistema/ArchivosPDF';
-    if (!file_exists($path)) {
-        mkdir($path, 0777, true);
-    }
-    // $analisis = 'Analisis';
-
-    $archivoPDF =  $path . '/Analisis.pdf';
-    $pdf->Output('F', $archivoPDF); // Guardar en carpeta archivosPDF
-    // Envia reporte por correo
-    enviarArchivoCorreo($archivoPDF);
-}
-    // analisisPDF('$tabla', ' $k', '$j', '$m', '$a', '$pronostico');
-    // integracionPDF("ArchivoX", "FBX", 10, 90, 100);
+?>

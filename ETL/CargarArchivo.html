@@ -42,6 +42,7 @@
             </div>
         </div>
     </body>
+    <footer></footer>
     <script>
         $('#Archivo').change(function() {
             var i = $(this).prev('label').clone();
@@ -65,6 +66,15 @@
     body {
         background-color: #372869;
         font-family: Verdana, Geneva, sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow-y: hidden;
+    }
+    footer{
+        width: 100%;
+        height: 77vh;
+        margin: -20% 0 0 0;
+        background-image: url("../Sistema/images/Footer.jpg");
     }
     label {
         font-size: x-large;
@@ -158,10 +168,11 @@
         .row { grid-template-columns: repeat(4fr, 1fr); }
     }
     @media (min-width: 300px) and (max-width: 800px) {
+        body { overflow-y: visible; }
         .row { grid-template-columns: repeat(1, 1fr); }
         .column1 { margin-left: 0; padding: 3% 0% }
         .column2 { padding-right: 0; }
-        .column1:active{ color: white; background-color: rgba(140, 122, 230, 0.7); }
+        .column1:active{ margin: 1.8% 0 0 2%; padding: 2% 2%;}
     }
 
     .hidden{

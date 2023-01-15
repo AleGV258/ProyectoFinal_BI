@@ -30,98 +30,48 @@
     <body>
         <div class='row'>
             <a class='column1' href='../ETL/CargarArchivo.html'>Regresar</a>
-            <label class="column2">Estadísiticas (Todavia no termino con los estilos)</label><br><br>
+            <label class="column2">Estadísiticas</label><br><br>
         </div>
         <!-- <div id="titulo">Estadísticas</div> -->
         <div class="estadistica">
-            Nombre del archivo: <?php echo("<a style='color: rgba(140, 122, 230, 0.7);'>".$NombreArchivo."</a>"); ?><br>
+            Nombre del archivo: <?php echo("<a class='textoPre'>".$NombreArchivo."</a>"); ?><br>
         </div>
         <div class="estadistica">
-            Tipo de archivo: <?php echo("<a style='color: rgba(140, 122, 230, 0.7);''>.".$TipoArchivo."</a>"); ?><br>
+            Tipo de archivo: <?php echo("<a class='textoPre'>.".$TipoArchivo."</a>"); ?><br>
         </div>
-
-
-
-        <div id="nombre">
-            <!-- <div id="dato">
-                <a href="../ETL/FFiltro.html ">
-                    <input id="filtro" type="button" value="Aplicar Filtro" />
-                </a>
-            </div> -->
-        </div>
-
-
-
         <div class="insertados">
             <div class="insertadosPorcentaje"><?php echo($Total); ?></div>
-            <div class="insertadosTexto">Total de Datos Insertados Correctamente</div>
+            <div class="insertadosTexto">Total de Datos Insertados Correctamente.</div>
         </div>
-        <br>
-        <div>
-            <div id="porcentajes">
-                <div id="circulo1">
-                    <?php echo $PorcentajeInsertados; ?>%
-                </div>
-                <div id="circulo2">
-                    <?php echo $Errores; ?>%
-                </div>
-            </div>
-            <div id="info">
-                <strong>Datos Insertados correctamente</strong>
-                <br>
-                Se han insertado <strong><?php echo $Insertados; ?></strong> datos correctamente a la base de datos.
-                <br>
-                <br>
-                <br>
-                <strong>Datos no insertados</strong>
-                <br>
-                Se han detectado <strong><?php echo $Errores; ?></strong> datos que no se pudieron insertar correctamente a la base de datos.
+        <div class="insertados">
+            <div class="insertadosPorcentaje insertadosCorrecto"><?php echo($PorcentajeInsertados); ?>%</div>
+            <div class="insertadosTexto">
+                Datos Insertados Correctamente:<br>
+                <a class="textoPre">Se han Insertado <?php echo($Insertados); ?> Datos correctamente a la Base de Datos.</a>
             </div>
         </div>
-        <!-- <div>
-            <form action="./AplicarFiltro.php" method="post">
-
-                <label for="">Selecciona los filtros que serán aplicados</label><br><br>
-
-                <input type="checkbox" name="CVE_ENT" id="CVE_ENT">
-                <label for="CVE_ENT"> CVE_ENT </label><br>
-
-                <input type="checkbox" name="AMBITO" id="AMBITO">
-                <label for="AMBITO"> AMBITO </label><br>
-
-                <input type="checkbox" name="MAPA" id="MAPA">
-                <label for="MAPA"> MAPA </label><br>
-
-                <input type="checkbox" name="CVE_MUN" id="CVE_MUN">
-                <label for="CVE_MUN"> CVE_MUN </label><br>
-
-                <input type="checkbox" name="CVE_LOC" id="CVE_LOC">
-                <label for="CVE_LOC"> CVE_LOC </label><br>
-
-                <input type="checkbox" name="ALTITUD" id="ALTITUD">
-                <label for="ALTITUD"> ALTITUD </label><br>
-
-                <input type="checkbox" name="LAT_DECIMAL" id="LAT_DECIMAL">
-                <label for="LAT_DECIMAL"> LAT_DECIMAL </label><br>
-
-                <input type="checkbox" name="LONG_DECIMAL" id="LONG_DECIMAL">
-                <label for="LONG_DECIMAL"> LONG_DECIMAL </label><br>
-
-                <input type="checkbox" name="NOM_ENT" id="NOM_ENT">
-                <label for="NOM_ENT"> NOM_ENT </label><br>
-
-                <input type="checkbox" name="NOM_ABR" id="NOM_ABR">
-                <label for="NOM_ABR"> NOM_ABR </label><br><br>
-
-                <input type="submit" value="Continuar">
-            </form>
-        </div> -->
+        <div class="insertados">
+            <div class="insertadosPorcentaje insertadosIncorrecto"><?php echo($PorcentajeErrores); ?>%</div>
+            <div class="insertadosTexto">
+                Datos Erroneos Insertados:<br>
+                <a class="textoPre">Se han detectado <?php echo($Errores); ?> Datos que no se pudieron Insertar correctamente a la Base de Datos.</a>
+            </div>
+        </div><br><br>
+        <?php include("../ETL/FFiltro.html"); ?>
     </body>
+    <footer></footer>
 </html>
 <style>
     body {
         background-color: #372869;
         font-family: Verdana, Geneva, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    footer{
+        width: 100%;
+        height: 77vh;
+        background-image: url("./images/Footer.jpg");
     }
     label {
         font-size: x-large;
@@ -141,44 +91,66 @@
     }
     form {
         display: grid;
-        grid-template-columns: 40%; 
+        grid-template-columns: 5% 20%; 
+        grid-row-gap: 5%;
         justify-content: center;
         align-self: center;
+        
     }
-    .title{
-        margin-top: 8%;
+    .textoPre{
+        color: #9980FA;
     }
     .inputdata{
-        font-size: large;
+        font-size: x-large;
         font-weight: 600;
-        padding: 3% 0.8%;
-        margin: 2% 0 2% 0;
+        padding: 8% 0;
+        margin: 2% -30% 2% -40%;
         border-radius: 10px;
-        text-align: center;
         outline: none;
         border: none;
         cursor: pointer;
     }
     .insertados{
         width: 60%;
+        margin: 2% 20%;
         display: grid;
-        grid-template-columns: 30% 50%;
+        grid-template-columns: 15% 75%;
+        gap: 4%;
+        padding: 1% 0;
         justify-content: center;
         align-items: center;
         text-align: center;
-        background-color: red;
+        border: solid 5px rgba(140, 122, 230, 0.7);
+        border-radius: 10px;
+        font-size: large;
     }
     .insertadosPorcentaje{
-        float: left;
+        font-weight: 600;
+        color: #fff;
+        padding: 35% 0;
+        border: solid 5px #009432;
+        border-radius: 100px;
+    }
+    .insertadosPorcentaje:hover{
+        background-color: #44bd32;
+        cursor: cell;
     }
     .insertadosTexto{
-        float: left;
+        font-size: x-large;
+        color: #fff;
     }
-
-
-
-
-
+    .insertadosCorrecto{
+        border: solid 5px #0652DD;
+    }
+    .insertadosCorrecto:hover{
+        background-color: #4b7bec;
+    }
+    .insertadosIncorrecto{
+        border: solid 5px #EA2027;
+    }
+    .insertadosIncorrecto:hover{
+        background-color: #e84118;
+    }
     .inputdata:hover{
         background-color: rgba(140, 122, 230, 0.7);
     }
@@ -188,16 +160,11 @@
     input[type="submit"]:active{
         color: white;
     }
-    input[type="file"]{
-        display: none;
-    }
-    .uploadLabel {
-        border: 1px solid #ccc;
-        display: inline-block;
-        padding: 7px 15px;
-        cursor: pointer;
-        border-radius: 5px;
-        text-align: center;
+    input[type="checkbox"] {
+        height: 30px;
+        width: 30px;
+        margin-right: 15px;
+        accent-color: rgba(140, 122, 230, 1.0);
     }
     .row {
         display: grid;
@@ -243,14 +210,14 @@
         .row { grid-template-columns: repeat(4fr, 1fr); }
     }
     @media (min-width: 300px) and (max-width: 800px) {
+        label{ font-size: medium; }
+        input[type="checkbox"] { width: 15px; height: 15px; margin: 0 0 0 -30px; }
         .row { grid-template-columns: repeat(1, 1fr); }
-        .column1 { margin-left: 0; padding: 3% 0% }
+        .column1 { margin-left: 0; padding: 3% 0%; }
         .column2 { padding-right: 0; }
-        .column1:active{ color: white; background-color: rgba(140, 122, 230, 0.7); }
+        .column1:active{ margin: 1.8% 0 0 2%; padding: 2% 2%;}
+        .insertadosPorcentaje { padding: 33% 10%; font-size: small; }
+        .insertadosTexto{ font-size: medium; padding: 3% 0; }
+        .insertados { grid-template-columns: 25% 65%; }
     }
 </style>
-<?php
-    // } else {
-    //     header('Location: Login.html');
-    // }
-?>

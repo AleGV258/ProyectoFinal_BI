@@ -17,41 +17,39 @@
     -->
 
     <body>
-        <form action="./AplicarFiltro.php" method="POST">
-
-            <label for="">Selecciona los filtros que serán aplicados</label><br><br>
-            
+        <label>Selecciona los filtros que serán aplicados</label><br><br>
+        <form action="../ETL/AplicarFiltro.php" method="POST" class="form">
             <input type="checkbox" name="CVE_ENT" id="CVE_ENT">
-            <label for="CVE_ENT"> CVE_ENT </label><br>
+            <label for="CVE_ENT"> CVE_ENT </label>
 
             <input type="checkbox" name="AMBITO" id="AMBITO">
-            <label for="AMBITO"> AMBITO </label><br>
+            <label for="AMBITO"> AMBITO </label>
 
             <input type="checkbox" name="MAPA" id="MAPA">
-            <label for="MAPA"> MAPA </label><br>
+            <label for="MAPA"> MAPA </label>
 
             <input type="checkbox" name="CVE_MUN" id="CVE_MUN">
-            <label for="CVE_MUN"> CVE_MUN </label><br>
+            <label for="CVE_MUN"> CVE_MUN </label>
 
             <input type="checkbox" name="CVE_LOC" id="CVE_LOC">
-            <label for="CVE_LOC"> CVE_LOC </label><br>
+            <label for="CVE_LOC"> CVE_LOC </label>
 
             <input type="checkbox" name="ALTITUD" id="ALTITUD">
-            <label for="ALTITUD"> ALTITUD </label><br>
+            <label for="ALTITUD"> ALTITUD </label>
 
             <input type="checkbox" name="LAT_DECIMAL" id="LAT_DECIMAL">
-            <label for="LAT_DECIMAL"> LAT_DECIMAL </label><br>
+            <label for="LAT_DECIMAL"> LAT_DECIMAL </label>
 
             <input type="checkbox" name="LONG_DECIMAL" id="LONG_DECIMAL">
-            <label for="LONG_DECIMAL"> LONG_DECIMAL </label><br>
+            <label for="LONG_DECIMAL"> LONG_DECIMAL </label>
 
             <input type="checkbox" name="NOM_ENT" id="NOM_ENT">
-            <label for="NOM_ENT"> NOM_ENT </label><br>
+            <label for="NOM_ENT"> NOM_ENT </label>
 
             <input type="checkbox" name="NOM_ABR" id="NOM_ABR">
-            <label for="NOM_ABR"> NOM_ABR </label><br><br>
+            <label for="NOM_ABR"> NOM_ABR </label><br>
 
-            <input type="submit" value="Enviar">
+            <input type="submit" value="Enviar" class="inputdata">
         </form>
     </body>
 </html>

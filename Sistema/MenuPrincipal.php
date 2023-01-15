@@ -27,27 +27,34 @@
             </div>
             <div class="cards">
                 <div class="card">
-                    <a class="opcion" href="../ETL/CargarArchivo.html">Integración</a>
-                </div>
-                <div class="card">
                     <a class="opcion" href="../BI/Configuracion.html">Análisis</a>
                 </div>
                 <div class="card">
-                    <a class="opcion" href="#">Autores</a>
+                    <a class="opcion" href="../ETL/CargarArchivo.html">Integración</a>
+                </div>
+                <div class="card">
+                    <a class="opcion" href="./Autores.html">Autores</a>
                 </div>
                 <div class="card">
                     <a class="opcion" href="../Login/CierraSesion.php">Cerrar Sesión</a>
                 </div>
             </div>
         </body>
+        <footer></footer>
     </html>
-    
     <style>
         body{
             background-color: #372869;
             font-family: Verdana, Geneva, sans-serif;
             margin: 0;
             padding: 0;
+            overflow-y: hidden;
+        }
+        footer{
+            width: 100%;
+            height: 77vh;
+            margin: -20% 0 0 0;
+            background-image: url("./images/Footer.jpg");
         }
         .usuario{
             width: 100%;
@@ -94,6 +101,7 @@
             border: white 0px solid;
         }
         @media (min-width: 300px) and (max-width: 800px) {
+            body { overflow-y: visible; }
             .card{
                 justify-content: center;
                 align-items: center;

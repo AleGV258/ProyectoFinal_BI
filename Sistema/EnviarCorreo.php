@@ -18,12 +18,12 @@
             //Server settings
             $mail->SMTPDebug = 0; // 2 muestra logs // 0 no muestra
             $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com';
-            $mail->SMTPAuth   = true;
-            $mail->Username   = 'world.consultory.services@gmail.com';
-            $mail->Password   = 'wsyhniwframfjolg';
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'world.consultory.services@gmail.com';
+            $mail->Password = 'wsyhniwframfjolg';
             $mail->SMTPSecure = 'ssl';
-            $mail->Port       = 465;
+            $mail->Port = 465;
 
             $mail->setFrom('world.consultory.services@gmail.com', 'Inteligencia de Negocios - Reporte de Sistema');
 
@@ -33,12 +33,12 @@
                 WHERE Tipo = 'A';";
 
             $Result = mysqli_query($Con, $SQL);
-            // $Total = mysqli_num_rows($Result);
-            // for ($f = 0; $f < $Total; $f++) {
-            //     $Fila = mysqli_fetch_row($Result);
-            //     $mail->addAddress($Fila[2]);  // Envia correo a todos los Administradores
-            // }
-            // $mail->addAttachment($archivoPDF);  // Agrega el archivoPDF al correo
+            $Total = mysqli_num_rows($Result);
+            for ($f = 0; $f < $Total; $f++) {
+                $Fila = mysqli_fetch_row($Result);
+                $mail->addAddress($Fila[2]);  // Envia correo a todos los Administradores
+            }
+            $mail->addAttachment(utf8_decode($archivoPDF));  // Agrega el archivoPDF al correo
 
             // Content
             date_default_timezone_set('America/Mexico_City'); 

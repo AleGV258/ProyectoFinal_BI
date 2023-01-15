@@ -44,7 +44,8 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`idUsuario`, `NombreUsuario`, `Correo`, `Password`, `Tipo`, `Bloqueado`, `Intentos`) VALUES
 (1, 'Daniel', 'dleon29@alumnos.uaq.mx', 'D123', 'A', 0, 0),
 (2, 'Andres', 'ajimenez69@alumnos.uaq.mx', 'A123', 'A', 0, 0),
-(3, 'Michell', 'ale.gv258@gmail.com', 'M123', 'A', 0, 0);
+(3, 'Michell', 'ale.gv258@gmail.com', 'M123', 'A', 0, 0),
+(4, 'Maestro Paulin', 'francisco.javier.paulin@uaq.mx', 'P123', 'U', 0, 0);
 
 --
 -- Índices para tablas volcadas

