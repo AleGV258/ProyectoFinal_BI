@@ -76,7 +76,6 @@
         <script>alert("Usuario Incorrecto"); window.location.href = "../index.html";</script>
 <?php
     }
-
     mysqli_close($Con);
-    
+
 ?>

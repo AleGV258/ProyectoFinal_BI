@@ -21,8 +21,6 @@
     $spreadsheet = $reader->load($Archivo);
 
     $Con = mysqli_connect('127.0.0.1', 'root', '', 'cucage');
-    // Reestablecer Tabla
-    mysqli_query($Con, "TRUNCATE mar11;");
     
     // (C) READ CELLS
     $sheet = $spreadsheet->getActiveSheet();

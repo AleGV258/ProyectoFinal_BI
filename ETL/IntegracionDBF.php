@@ -16,8 +16,6 @@
     $TipoArchivo = $_SESSION['ArchivoExtension'];
     
     $Con = mysqli_connect("127.0.0.1", "root", "", "cucage");
-    // Reestablecer Tabla
-    mysqli_query($Con, "TRUNCATE mar11;");
 
     $table = new TableReader($Archivo);
     $Contador = 0;
