@@ -36,9 +36,9 @@
             $Total = mysqli_num_rows($Result);
             for ($f = 0; $f < $Total; $f++) {
                 $Fila = mysqli_fetch_row($Result);
-                $mail->addAddress($Fila[2]);  // Envia correo a todos los Administradores
+                $mail->addAddress($Fila[2]); // Envia correo a todos los Administradores
             }
-            $mail->addAttachment(utf8_decode($archivoPDF));  // Agrega el archivoPDF al correo
+            $mail->addAttachment(utf8_decode($archivoPDF)); // Agrega el archivoPDF al correo
 
             // Content
             date_default_timezone_set('America/Mexico_City'); 
