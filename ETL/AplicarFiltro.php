@@ -167,8 +167,8 @@
     }
     footer{
         width: 100%;
-        height: 75vh;
-        margin: -3% 0 0 0;
+        height: 74vh;
+        margin: 0 0 -3% 0;
         background-image: url("../Sistema/images/Footer.jpg");
     }
     label {

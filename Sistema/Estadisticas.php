@@ -70,7 +70,7 @@
     }
     footer{
         width: 100%;
-        height: 77vh;
+        height: 74vh;
         background-image: url("./images/Footer.jpg");
     }
     label {
