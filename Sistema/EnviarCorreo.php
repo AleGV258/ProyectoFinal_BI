@@ -20,8 +20,8 @@
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'world.consultory.services@gmail.com';
-            $mail->Password = 'wsyhniwframfjolg';
+            $mail->Username = '***';
+            $mail->Password = '***';
             $mail->SMTPSecure = 'ssl';
             $mail->Port = 465;
 
